@@ -1,6 +1,6 @@
 import Router  from 'koa-router'
-import { rootController } from '../controllers/root.controller'
+import { pictureController } from '../controllers/picture.controller'
 
 export const router = new Router({ prefix: '/api/v1'})
 
-router.get('/', rootController)
+router.get('/pic/:id/:format?', pictureController)
