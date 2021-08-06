@@ -1,14 +1,17 @@
-import { json2xmlConvert } from './json2xml';
+import { DominantResult } from './checkDominant';
+import { json2csvConvert, json2xmlConvert } from './jsonConverter';
 
-export const responseBody = (
-    data: any,
+
+export const responseBody = async (
+    data: DominantResult | string,
     type: 'json' | 'xml' | 'csv'
-): string => {
+): Promise<string | DominantResult> => {
     if (type === 'xml') {
-        return json2xmlConvert(data);
+        return json2xmlConvert(data as string);
     }
     if (type === 'csv') {
-        return 'csv convert';
+        const csvData = await json2csvConvert(data as DominantResult);
+        return csvData;
     }
     return data;
 };

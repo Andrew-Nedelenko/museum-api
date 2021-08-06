@@ -1,9 +1,14 @@
 import { getColorFromURL } from 'color-thief-node';
 
-type DominantResult = {
+export type DominantResult = {
     rgb: string;
     dominantColor: string;
 };
+
+export interface DominantResponse extends DominantResult {
+  objectID: number
+  primaryImage: string;
+}
 
 const calculatePureDominant = (colors: number[]) => {
     const colorsRGB = ['red', 'green', 'blue'];

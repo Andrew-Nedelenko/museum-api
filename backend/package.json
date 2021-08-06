@@ -15,6 +15,7 @@
     "@types/color-thief-node": "^1.0.1",
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
+    "@types/koa2-ratelimit": "^0.9.1",
     "@types/node": "^16.4.12",
     "@types/node-fetch": "^2.5.12",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
@@ -28,8 +29,11 @@
   "dependencies": {
     "color-thief-node": "^1.0.4",
     "dotenv": "^10.0.0",
+    "json-2-csv": "^3.14.1",
     "koa": "^2.13.1",
     "koa-router": "^10.0.0",
-    "node-libcurl": "^2.3.3"
+    "koa2-ratelimit": "^0.9.0",
+    "node-libcurl": "^2.3.3",
+    "xml-js": "^1.6.11"
   }
 }

@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 import { curly } from 'node-libcurl';
 import { env } from '../config/env';
-import { checkDominant } from '../utils/checkDominant';
+import { checkDominant, DominantResponse } from '../utils/checkDominant';
 import { responseBody } from '../utils/response.body';
 
 export const pictureController = async (ctx: Context): Promise<void> => {
@@ -21,5 +21,5 @@ export const pictureController = async (ctx: Context): Promise<void> => {
         ...(color && color),
     };
 
-    ctx.body = responseBody(responseData, format);
+    ctx.body = await responseBody(responseData as DominantResponse, format);
 };
