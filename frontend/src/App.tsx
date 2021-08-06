@@ -9,7 +9,7 @@ export type ImageData = {
 };
 
 function App() {
-    const [imgId, setImageId] = useState(1);
+    const [imgId, setImageId] = useState(34);
     const [imgData, setImgData] = useState<ImageData | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
@@ -44,7 +44,8 @@ function App() {
                                         style={{ backgroundColor: imgData.rgb }}
                                     />
                                 </div>
-                                <div className="color">
+                                {imgData.dominantColor !== 'none' && (
+                                  <div className="color">
                                     Primary Color:{' '}
                                     <span
                                         style={{
@@ -53,6 +54,8 @@ function App() {
                                         }}
                                     />
                                 </div>
+                                )}
+                                
                             </>
                         )}
                     </>
