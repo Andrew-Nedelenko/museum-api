@@ -4,16 +4,19 @@ import { env } from '../config/env';
 import { checkDominant, DominantResponse } from '../utils/checkDominant';
 import { responseBody } from '../utils/response.body';
 
-export const pictureController = async (ctx: Context): Promise<void> => {
-    const { id, format = 'json' } = ctx.params;
+export const pictureController = async (
+    ctx: Context
+): Promise<void | Response> => {
+    const { id = 1300, format = 'json' } = ctx.params;
     const { data } = await curly.get(
-        `${env('MUSEUM_API_URL')}public/collection/v1/objects/${id || 12345}`,
-        { timeout: 5 }
+        `${env('MUSEUM_API_URL')}public/collection/v1/objects/${id}`
     );
 
-    const { objectID, primaryImage } = data;
+    const { objectID, primaryImage, message } = data;
 
-    const color = await checkDominant(primaryImage).catch(() => undefined);
+    const color = message
+        ? undefined
+        : await checkDominant(primaryImage).catch(() => undefined);
 
     const responseData = {
         objectID,

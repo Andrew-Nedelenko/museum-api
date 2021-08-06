@@ -9,11 +9,11 @@ export type ImageData = {
 };
 
 function App() {
-    const [imgId, setImageId] = useState(34);
+    const [imgId, setImageId] = useState(3799);
     const [imgData, setImgData] = useState<ImageData | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
-        fetch(`http://localhost:3400/api/v1/pic/${imgId}`)
+        fetch(`${process.env.REACT_APP_API_URL}pic/${imgId}`)
             .then((res) => res.text())
             .then((data) => setImgData(JSON.parse(data)))
             .finally(() => setIsLoading(false));
@@ -21,7 +21,8 @@ function App() {
 
     const changeImage = (arg: number) => {
         setIsLoading(true);
-        setImageId(arg < 1 ? imgId : imgId + arg);
+        const picNumber = imgId + arg < 1 ? imgId : imgId + arg;
+        setImageId(picNumber);
     };
     return (
         <div className="wrap">
@@ -45,17 +46,16 @@ function App() {
                                     />
                                 </div>
                                 {imgData.dominantColor !== 'none' && (
-                                  <div className="color">
-                                    Primary Color:{' '}
-                                    <span
-                                        style={{
-                                            backgroundColor:
-                                                imgData.dominantColor,
-                                        }}
-                                    />
-                                </div>
+                                    <div className="color">
+                                        Primary Color:{' '}
+                                        <span
+                                            style={{
+                                                backgroundColor:
+                                                    imgData.dominantColor,
+                                            }}
+                                        />
+                                    </div>
                                 )}
-                                
                             </>
                         )}
                     </>
@@ -65,7 +65,6 @@ function App() {
             <div
                 className="paginate"
                 onClick={() => !isLoading && changeImage(1)}
-                
             >
                 {isLoading ? 'x' : '>'}
             </div>
