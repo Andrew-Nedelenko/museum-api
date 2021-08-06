@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import helmet from 'koa-helmet';
+import cors from '@koa/cors'
 import { router } from './router/router';
 import { logger } from './config/Logger';
 
@@ -11,6 +12,7 @@ class App {
             logger(this.app);
         }
         this.app.proxy = true;
+        this.app.use(cors({origin: 'http://localhost:3200'}))
         this.app.use(helmet()).use(router.routes());
     }
 
