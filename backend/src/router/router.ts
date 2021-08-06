@@ -1,6 +1,12 @@
-import Router  from 'koa-router'
-import { pictureController } from '../controllers/picture.controller'
+import Router from 'koa-router';
+import { RateLimit } from 'koa2-ratelimit';
+import { pictureController } from '../controllers/picture.controller';
 
-export const router = new Router({ prefix: '/api/v1'})
+export const router = new Router({ prefix: '/api/v1' });
 
-router.get('/pic/:id/:format?', pictureController)
+const limiter = RateLimit.middleware({
+    interval: { sec: 1 },
+    max: 80,
+});
+
+router.get('/pic/:id/:format?', limiter, pictureController);

@@ -8,14 +8,18 @@ class Env {
     private readonly process = process.env;
 
     constructor() {
-      dotenv.config({ path: this.root(process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev') });
+        dotenv.config({
+            path: this.root(
+                process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev'
+            ),
+        });
     }
 
     getEnv(en: string): string {
-      if (typeof this.process[en] === 'undefined') {
-        throw new Error(red(`${en} equals ${typeof process.env[en]}!`));
-      }
-      return this.process[en] as string;
+        if (typeof this.process[en] === 'undefined') {
+            throw new Error(red(`${en} equals ${typeof process.env[en]}!`));
+        }
+        return this.process[en] as string;
     }
 }
 
